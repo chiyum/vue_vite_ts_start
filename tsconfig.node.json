@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "composite": true, // 啟用專案引用，允許這個配置的 TypeScript 專案被其他專案引用
+    "skipLibCheck": true, // 跳過對所有 .d.ts 檔案的類型檢查，可以提高編譯速度
+    "module": "ESNext", // 指定模塊代碼的風格為最新的 ECMAScript 標準
+    "moduleResolution": "bundler", // 使用打包工具的模塊解析策略，適合在使用像 webpack 或 Rollup 這樣的打包工具時
+    "allowSyntheticDefaultImports": true // 允許在沒有預設導出的模塊中使用預設導入語法
+  },
+  "include": [
+    "vite.config.ts" // 僅包括此配置文件中指定的 vite.config.ts 文件
+  ]
+}

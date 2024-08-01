@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "target": "ES2020", // 指定生成的 JavaScript 目標版本為 ES2020
+    "esModuleInterop": true, // 允許進行 ES 模塊之間的互操作性
+    "allowSyntheticDefaultImports": true, // 允許在沒有預設導出的模塊中使用預設導入語法
+    "useDefineForClassFields": true, // 使用標準的 JavaScript 方式定義類字段
+    "module": "ESNext", // 指定模塊代碼的風格為最新的 ECMAScript 標準
+    "lib": [
+      "ES2020", // 包括 ES2020 標準庫中的類型定義
+      "DOM", // 包括瀏覽器 DOM 的類型定義
+      "DOM.Iterable" // 包括 DOM 集合的可迭代類型定義
+    ],
+    "skipLibCheck": true, // 跳過對所有 .d.ts 檔案的類型檢查
+    "baseUrl": "./", // 為非相對模塊設定基本目錄路徑
+    "paths": {
+      "@/*": [
+        "src/*" // 設置自定義路徑別名 "@" 指向 "src/" 目錄
+      ]
+    },
+    "moduleResolution": "Node", // 使用 Node.js 風格來解析模塊
+    "resolveJsonModule": true, // 允許導入 JSON 檔案作為模塊
+    "isolatedModules": true, // 確保每個文件能被獨立轉換，適合與 Babel 等轉譯工具一起使用
+    "noEmit": true, // 編譯時不生成輸出文件，僅進行類型檢查
+    "jsx": "preserve", // 保留 JSX 語法，交給後續轉譯工具處理
+    "strict": false, // 不啟用所有嚴格的類型檢查選項
+    "noUnusedLocals": false, // 不報告未使用的局部變量的錯誤
+    "noUnusedParameters": false, // 不報告未使用的參數的錯誤
+    "noFallthroughCasesInSwitch": true // 防止 switch 語句中的 case 落空，要求每個 case 都必須有 break 或 return
+  },
+  "include": [
+    "src/**/*.ts", // 包括 src 目錄下的所有 TypeScript 文件
+    "src/**/*.tsx", // 包括 src 目錄下的所有 TypeScript JSX 文件
+    "src/**/*.vue" // 包括 src 目錄下的所有 Vue 文件
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json" // 引用另一個配置文件，常用於管理項目中的不同部分
+    }
+  ]
+}
