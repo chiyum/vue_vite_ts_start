@@ -15,7 +15,6 @@ const { t } = useI18n();
 //   console.log(res, 'res');
 // };
 // test();
-
 </script>
 
 <template>

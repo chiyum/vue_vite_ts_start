@@ -1,43 +1,60 @@
-// 引入vue模版的eslint
+// 引入所需的插件和配置
 import pluginVue from 'eslint-plugin-vue';
 import eslint from '@eslint/js';
-// ts-eslint解析器，使 eslint 可以解析 ts 语法
 import tseslint from 'typescript-eslint';
-// vue文件解析器
 import vueParser from 'vue-eslint-parser';
 import { readFileSync } from 'fs';
+import prettierConfig from 'eslint-config-prettier';
+import prettierPlugin from 'eslint-plugin-prettier';
 
+// 讀取自動導入的配置文件
 const autoImportConfig = JSON.parse(
   readFileSync('./.eslintrc-auto-import.json', 'utf-8')
 );
 
 export default tseslint.config({
-  // 使用 tseslint.config 來支持新的扁平配置格式
+  // 指定此配置適用的文件類型
+  files: ['**/*.{js,ts,vue}'],
+
+  // 擴展基礎配置
   extends: [
-    eslint.configs.recommended, // 使用 ESLint 推薦的基本規則集
-    ...tseslint.configs.recommended, // 使用 TypeScript ESLint 推薦的規則集
-    ...pluginVue.configs['flat/essential'] // 使用 Vue 3 推薦的 ESLint 配置
+    eslint.configs.recommended, // ESLint 推薦配置
+    ...tseslint.configs.recommended, // TypeScript ESLint 推薦配置
+    ...pluginVue.configs['flat/essential'], // Vue 3 基本 ESLint 配置
+    prettierConfig // Prettier 配置，用於解決 ESLint 和 Prettier 的衝突
   ],
+
+  // 定義使用的插件
+  plugins: {
+    'vue': pluginVue, // Vue.js 插件
+    'prettier': prettierPlugin, // Prettier 插件
+    '@typescript-eslint': tseslint.plugin // TypeScript ESLint 插件
+  },
+
+  // 語言選項配置
   languageOptions: {
-    parser: vueParser, // 使用 vue-eslint-parser 來解析 .vue 文件
+    parser: vueParser, // 使用 Vue 解析器
     parserOptions: {
-      parser: tseslint.parser, // 在 .vue 文件中的 <script> 標籤內使用 TypeScript 解析器
-      sourceType: 'module' // 指定源碼是 ECMAScript 模塊
+      ecmaVersion: 'latest', // 使用最新的 ECMAScript 版本
+      sourceType: 'module', // 代碼是 ECMAScript 模塊
+      parser: tseslint.parser // 在 <script> 標籤中使用 TypeScript 解析器
     },
-    // 支援eslint9.0.0以上版本
     globals: {
-      ...autoImportConfig.globals
+      ...autoImportConfig.globals // 添加自動導入的全局變量
     }
   },
+
+  // ESLint 規則配置
   rules: {
-    'semi': ['warn', 'always'], // 警告不使用分號
+    'semi': ['warn', 'always'], // 要求使用分號，違反時警告
     "comma-dangle": ["error", "never"], // 禁止使用尾隨逗號
     "no-unused-vars": 2, // 禁止未使用的變量（錯誤級別）
     'space-before-function-paren': 0, // 關閉函數括號前的空格規則
     'generator-star-spacing': 'off', // 關閉生成器函數 * 的空格規則
     'object-curly-spacing': 0, // 關閉對象字面量大括號內的空格規則
     'array-bracket-spacing': 0, // 關閉數組括號內的空格規則
-    'vue/multi-word-component-names': 'off', // 禁用多詞名稱規則
-    '@typescript-eslint/no-explicit-any': 'off' // 禁用 @typescript-eslint/no-explicit-any 規則
+    'vue/multi-word-component-names': 'off', // 關閉 Vue 組件需要多單詞名稱的規則
+    '@typescript-eslint/no-explicit-any': 'off', // 允許使用 any 類型
+    'prettier/prettier': 'error' // 啟用 Prettier 規則，違反時報錯
   }
 });

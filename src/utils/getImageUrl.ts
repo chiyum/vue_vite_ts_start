@@ -1,4 +1,4 @@
-export const getImageUrl = (router:string):string => {
+export const getImageUrl = (router: string): string => {
   return new URL(`../assets/images/${router}`, import.meta.url).href;
 };
 
