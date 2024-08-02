@@ -3,11 +3,17 @@ import vue from "@vitejs/plugin-vue";
 import AutoImport from "unplugin-auto-import/vite";
 import { fileURLToPath, URL } from "node:url";
 import eslint from "vite-plugin-eslint";
+import { quasar, transformAssetUrls } from "@quasar/vite-plugin";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue(),
+    vue({
+      template: { transformAssetUrls }
+    }),
+    quasar({
+      sassVariables: "src/quasar-variables.sass"
+    }),
     /** 自動導入plugins */
     AutoImport({
       imports: ["vue", "vue-router", "pinia"], // 自動導入的模塊
