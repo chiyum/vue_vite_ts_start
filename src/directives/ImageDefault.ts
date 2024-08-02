@@ -13,5 +13,5 @@ export default {
       const fallbackImage = binding.value || defaultImage;
       el.src = fallbackImage;
     };
-  },
+  }
 };

@@ -22,7 +22,7 @@ for (const path in files) {
   /* 將處理好的模組push */
   modules.push({
     componentName: name,
-    component: files[path].default,
+    component: files[path].default
   });
 }
 
@@ -32,7 +32,7 @@ const layouts = {
     modules.forEach((m) => {
       app.component(m.componentName, m.component);
     });
-  },
+  }
 };
 
 export default layouts;

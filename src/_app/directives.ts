@@ -1,7 +1,7 @@
 const files = import.meta.glob("../directives/*.ts", { eager: true });
 const directives = {
   install: (app) => {
-    for (let path in files) {
+    for (const path in files) {
       const paths = path.split("/");
 
       const fileName = paths[paths.length - 1]
@@ -11,7 +11,7 @@ const directives = {
       app.directive(fileName, (files[path] as any).default);
       // console.log(fileName, 'filename');
     }
-  },
+  }
 };
 
 export default directives;

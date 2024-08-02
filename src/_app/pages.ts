@@ -1,3 +1,5 @@
+import { Component } from "vue";
+
 // 定義頁面模組的類型
 interface PageModule {
   default: {
@@ -18,7 +20,7 @@ interface Route {
     title: string;
     // inSidebar: boolean;
   };
-  component: () => Promise<any>;
+  component: () => Promise<Component>;
 }
 
 // 使用 import.meta.glob 獲取所有的 .vue 文件
@@ -46,9 +48,9 @@ for (const path in files) {
     name: currentPath, // 路由名稱
     meta: {
       layout: pageModule.default.layout || "layout-default", // 頁面 layout
-      title: pageModule.default.title || "app.project.title", // 頁面 title
+      title: pageModule.default.title || "app.project.title" // 頁面 title
     },
-    component: files[path], // 頁面 component
+    component: files[path] // 頁面 component
   });
 }
 

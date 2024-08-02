@@ -29,5 +29,5 @@ export default {
       window.removeEventListener("click", el.__clickOutsideHandler__);
       el.__clickOutsideHandler__ = null;
     }
-  },
+  }
 };

@@ -1,8 +1,8 @@
-import { defineConfig } from "vite"
-import vue from "@vitejs/plugin-vue"
-import AutoImport from "unplugin-auto-import/vite"
-import { fileURLToPath, URL } from "node:url"
-import eslint from "vite-plugin-eslint"
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+import AutoImport from "unplugin-auto-import/vite";
+import { fileURLToPath, URL } from "node:url";
+import eslint from "vite-plugin-eslint";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -54,11 +54,11 @@ export default defineConfig({
       output: {
         // 定義資源文件的輸出路徑和命名規則
         assetFileNames: (assetInfo) => {
-          let extType = assetInfo.name.split(".").at(1) // 獲取文件的擴展名
+          let extType = assetInfo.name.split(".").at(1); // 獲取文件的擴展名
           if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
-            extType = "img" // 如果是圖片文件，將擴展名設置為 "img"
+            extType = "img"; // 如果是圖片文件，將擴展名設置為 "img"
           }
-          return `assets/${extType}/[name]-[hash][extname]` // 將資源文件輸出到對應的文件夾
+          return `assets/${extType}/[name]-[hash][extname]`; // 將資源文件輸出到對應的文件夾
         },
         // 定義代碼塊的輸出路徑和命名規則
         chunkFileNames: "admin_assets/js/[name]-[hash].js",
@@ -71,14 +71,14 @@ export default defineConfig({
               .toString()
               .split("node_modules/")[1]
               .split("/")[0]
-              .toString()
+              .toString();
           }
           if (id.includes("pages")) {
             // 如果模塊來自 views 目錄，將其單獨打包為 "views"
-            return "pages"
+            return "pages";
           }
         }
       }
     }
   }
-})
+});

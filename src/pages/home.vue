@@ -2,7 +2,7 @@
 
 defineOptions({
   layout: 'layout-default'
-})
+});
 </script>
 
 <template>
