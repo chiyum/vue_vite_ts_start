@@ -1,6 +1,6 @@
-import { mergeDeepRight } from "ramda"
+import { mergeDeepRight } from "ramda";
 //mergeDeepRight的功用是合併兩個obj,若有重複的值以第二個obj為主
-import pages from "./pages"
+import pages from "./pages";
 
 const createRoutes = (opts) => {
   /* 預設導入頁 */
@@ -9,7 +9,7 @@ const createRoutes = (opts) => {
       defaultPath: "/home"
     },
     opts
-  )
+  );
 
   const routes = [
     {
@@ -29,9 +29,9 @@ const createRoutes = (opts) => {
       name: "not-match",
       redirect: { name: "not-found" }
     }
-  ]
+  ];
 
-  return routes
-}
+  return routes;
+};
 
-export default createRoutes
+export default createRoutes;
