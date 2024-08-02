@@ -3,6 +3,9 @@
 defineOptions({
   layout: 'layout-default'
 });
+
+const { t } = useI18n();
+
 </script>
 
 <template>
@@ -16,7 +19,7 @@ defineOptions({
       </q-card-section>
 
       <q-card-section class="q-pt-none">
-        {{ "HOME" }}
+        {{ t('global.hello') }}
       </q-card-section>
     </q-card>
     </div>

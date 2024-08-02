@@ -16,7 +16,18 @@ export default defineConfig({
     }),
     /** 自動導入plugins */
     AutoImport({
-      imports: ["vue", "vue-router", "pinia"], // 自動導入的模塊
+      imports: [
+        "vue",
+        "vue-router",
+        "pinia",
+        {
+          "@arshown/vue3-i18n": [
+            // 列出你想要自動導入的函數或方法
+            "useI18n"
+            // 如果有其他你經常使用的函數，也可以加在這裡
+          ]
+        }
+      ], // 自動導入的模塊
       include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/, /\.md$/],
       dts: "src/auto-imports.d.ts",
       // eslint报错解决
