@@ -34,6 +34,21 @@
 儲存小函式所存的資料夾，目前是一個函式一個檔案。
 可以依照個人需求更改。
 
+### models
+儲存class的資料夾，可以以功能區分各個檔案
+
+### types
+儲存interface以及types等的資料夾，與models一樣可以使用功能來區分檔案
+
+### interceptors
+儲存axios攔截器的資料夾，依照功能區分檔案
+
+### locales
+儲存語系檔的資料夾，依照語系區分檔案
+
+### store
+儲存pinia的資料夾，pinia會根據功能分成不同的ts檔
+
 ### public
 存放不會打包的靜態檔
 
@@ -47,3 +62,5 @@
 - .eslintrc-auto-import.json 自動引入的設定檔
 
 - tsconfig.node.json tsconfig.json的額外設定檔
+
+- quasar-variables.scss quasar的變數檔，可以在此檔案中設定quasar的變數
