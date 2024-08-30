@@ -3,6 +3,7 @@ import vue from "@vitejs/plugin-vue";
 import AutoImport from "unplugin-auto-import/vite";
 import { fileURLToPath, URL } from "node:url";
 import eslint from "vite-plugin-eslint";
+import { viteMockServe } from "vite-plugin-mock";
 import { quasar, transformAssetUrls } from "@quasar/vite-plugin";
 
 // https://vitejs.dev/config/
@@ -37,6 +38,7 @@ export default defineConfig({
         globalsPropValue: true // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
       }
     }),
+    /** eslint */
     {
       // do not fail on serve (i.e. local development)
       ...eslint({
@@ -45,7 +47,11 @@ export default defineConfig({
       }),
       apply: "serve",
       enforce: "post"
-    }
+    },
+    viteMockServe({
+      mockPath: "mock",
+      enable: true
+    })
   ],
   /** 快捷路徑設定 */
   resolve: {

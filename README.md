@@ -5,6 +5,7 @@
 
 - quasar UI組件
 - pinia 狀態儲存
+- autoImport 自動引入
 
 ## 架構說明
 
@@ -64,3 +65,33 @@
 - tsconfig.node.json tsconfig.json的額外設定檔
 
 - quasar-variables.scss quasar的變數檔，可以在此檔案中設定quasar的變數
+
+## Version
+
+- **Node.js** v20.9.0
+- **yarn** v1.22.18
+- **vue** v3.4.31
+
+## Config
+
+- **.env.development** 開發模式
+- **.env.production** 生產模式
+- **.env.uat** 測試模式
+
+## Setup
+
+```
+yarn install
+```
+
+### Compiles and minifies for production
+
+```
+yarn run dev 開發模式
+yarn build 生產模式
+yarn build:uat 測試模式
+```
+
+### Deploy
+
+執行 compile 之後根目錄下產生 `/docs` 檔案夾

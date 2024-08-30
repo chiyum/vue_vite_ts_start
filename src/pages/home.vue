@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// import axios from "@/axios";
+import axios from "@/axios";
 // import { awaitAxios } from "@/axios";
 import GradientBorderBox from "@/components/gradient-border-box.vue";
 defineOptions({
@@ -9,13 +9,13 @@ defineOptions({
 const { t } = useI18n();
 
 /** axios範例用法 */
-// const test = async () => {
-//   console.log("test12");
-//   const res = await axios.post("/api/example", { n1ame: "test" });
-//   const res = await awaitAxios("post", "/api/example", { nam1e: "test" });
-//   console.log(res, 'res');
-// };
-// test();
+const test = async () => {
+  console.log("test12");
+  const res = await axios.get("/api/get", { params: { name: "test" } });
+  // const res = await awaitAxios("post", "/api/example", { nam1e: "test" });
+  console.log(res, "res");
+};
+test();
 </script>
 
 <template>
