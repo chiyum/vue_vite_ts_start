@@ -47,7 +47,12 @@ export const request = {
   delete<T = any>(url: string, data?: any): Promise<T> {
     return request.request("DELETE", url, { params: data });
   },
-  request<T = any>(method = "GET", url: string, data?: any, options?: any): Promise<T> {
+  request<T = any>(
+    method = "GET",
+    url: string,
+    data?: any,
+    options?: any
+  ): Promise<T> {
     return new Promise((resolve, reject) => {
       instance({ method, url, ...data, ...options })
         .then((res) => {
@@ -86,10 +91,10 @@ export const awaitAxios = <T = any>(
   return new Promise((resolve, reject) => {
     instance({ method, url, data, ...options }) // 更正 data 的传递方式
       .then((res) => {
-        resolve(res.data as T);  // 通常我们只需要从响应中获取 data 属性
+        resolve(res.data as T); // 通常我们只需要从响应中获取 data 属性
       })
       .catch((e: AxiosError) => {
-        resolve(e.response.data as T);  // 使用 reject 而不是 resolve 来处理错误
+        resolve(e.response.data as T); // 使用 reject 而不是 resolve 来处理错误
       });
   });
 };

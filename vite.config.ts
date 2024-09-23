@@ -53,6 +53,9 @@ export default defineConfig({
       enable: true
     })
   ],
+  optimizeDeps: {
+    include: ["@rive-app/canvas"]
+  },
   /** 快捷路徑設定 */
   resolve: {
     alias: {

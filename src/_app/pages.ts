@@ -25,7 +25,9 @@ interface Route {
 
 // 使用 import.meta.glob 獲取所有的 .vue 文件
 const files = import.meta.glob("../pages/**/*.vue");
-const defaults = import.meta.glob<PageModule>("../pages/**/*.vue", { eager: true });
+const defaults = import.meta.glob<PageModule>("../pages/**/*.vue", {
+  eager: true
+});
 
 const modules: Route[] = [];
 
@@ -33,10 +35,10 @@ for (const path in files) {
   /* 抓取路由 */
   const name = path.replace("../pages", "").toLowerCase().replace(".vue", "");
   let currentPath = name;
-  
+
   /* /index => / */
   currentPath = currentPath.replace(/\/index$/, "");
-  
+
   /* /_id => /:id  動態路由 */
   currentPath = currentPath.replace(/\/_+/g, "/:");
 

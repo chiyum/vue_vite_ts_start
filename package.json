@@ -11,6 +11,7 @@
   "dependencies": {
     "@arshown/vue3-i18n": "^1.3.2",
     "@quasar/extras": "^1.16.12",
+    "@rive-app/canvas": "^2.21.2",
     "@types/node": "^22.0.2",
     "axios": "^1.7.3",
     "git-cz": "^4.9.0",
