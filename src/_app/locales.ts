@@ -12,7 +12,10 @@ interface Messages {
   [locale: string]: Record<string, string>;
 }
 
-const files: Record<string, FileModule> = import.meta.glob("../locales/**/*.ts", { eager: true });
+const files: Record<string, FileModule> = import.meta.glob(
+  "../locales/**/*.ts",
+  { eager: true }
+);
 const messages: Messages = {};
 
 for (const path in files) {
