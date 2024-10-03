@@ -43,7 +43,7 @@ export default defineConfig({
       // do not fail on serve (i.e. local development)
       ...eslint({
         failOnWarning: false,
-        failOnError: false
+        failOnError: true
       }),
       apply: "serve",
       enforce: "post"

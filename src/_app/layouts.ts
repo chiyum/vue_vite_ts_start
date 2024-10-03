@@ -1,4 +1,4 @@
-import { App, Component } from 'vue';
+import { App, Component } from "vue";
 
 // 定義 layout 模組的類型
 interface LayoutModule {
@@ -7,7 +7,10 @@ interface LayoutModule {
 }
 
 // 使用 import.meta.glob 獲取所有的 .vue 文件
-const files = import.meta.glob("../layouts/*.vue", { eager: true }) as Record<string, { default: Component }>;
+const files = import.meta.glob("../layouts/*.vue", { eager: true }) as Record<
+  string,
+  { default: Component }
+>;
 const modules: LayoutModule[] = [];
 
 for (const path in files) {
@@ -18,7 +21,7 @@ for (const path in files) {
     .replace("../layouts/", "")
     .toLowerCase()
     .replace(".vue", "");
-  
+
   /* 將處理好的模組push */
   modules.push({
     componentName: name,
