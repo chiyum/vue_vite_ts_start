@@ -3,13 +3,15 @@ import { isNil, defaultTo, path } from "ramda";
 
 const route = useRoute();
 
+const isMobile = ref(false);
+
 const layout = computed(() => {
   /* 一開始都是 undefined */
   /* isNil為檢查空值，為null或undefined則return null */
   if (isNil(route?.path)) return null;
   /*
     拿設定的 layout。
-    通常預設是layout-default，但如果該頁面沒有設定layout，則會使用layout-error 
+    通常預設是layout-default，但如果該頁面沒有設定layout，則會使用layout-error
     defaultTo 設定預設值
     path 取得物件的值 相當於route.meta.layout
    */
@@ -25,6 +27,39 @@ const layout = computed(() => {
   // default(path(["meta", "layout"], store.state.route))
   return currentLayout;
 });
+const checkDevice = () => {
+  isMobile.value = window.innerWidth <= 768;
+};
+
+const getComponent = (vnode: VNode) => {
+  console.log("Original vnode:", vnode);
+
+  if (vnode?.type && typeof vnode.type === "object") {
+    const componentType = vnode.type as {
+      desktop?: () => Promise<Component>;
+      mobile?: () => Promise<Component>;
+    };
+
+    if ("desktop" in componentType && "mobile" in componentType) {
+      // AWD 組件
+      const selectedComponent = isMobile.value
+        ? componentType.mobile
+        : componentType.desktop;
+
+      return defineAsyncComponent({
+        loader: selectedComponent
+      });
+    }
+  }
+
+  // 如果不是 AWD 組件，返回原始的 vnode
+  return vnode;
+};
+
+onMounted(() => {
+  checkDevice();
+  window.addEventListener("resize", checkDevice);
+});
 </script>
 
 <template>
@@ -32,7 +67,7 @@ const layout = computed(() => {
   <component :is="layout">
     <!-- 內層利用router顯示 透過解構賦值 取得從router-view取得的component 在把Component用在:is＝"Component"身上-->
     <router-view v-slot="{ Component }">
-      <component :is="Component" />
+      <component :is="getComponent(Component)" />
     </router-view>
   </component>
 </template>
