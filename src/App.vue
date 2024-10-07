@@ -4,6 +4,7 @@ import { isNil, defaultTo, path } from "ramda";
 const route = useRoute();
 
 const isMobile = ref(false);
+provide("isMobile", isMobile); // 供layout等子組件使用當前設備是否為手機
 
 const layout = computed(() => {
   /* 一開始都是 undefined */
@@ -18,6 +19,8 @@ const layout = computed(() => {
   const currentLayout = defaultTo("layout-error")(
     path(["meta", "layout"], route)
   );
+  const useAwd = defaultTo(false)(path(["meta", "useAwd"], route));
+  const mobileLayout = currentLayout + "-mobile";
   // defaulto的功用就是給預設值
   // 這邊的用法是先設定defaultTo預設值，
   // 緊接著馬上用設置好的預設值下去執行再return結果給變數
@@ -25,7 +28,14 @@ const layout = computed(() => {
   // 分解大概長這樣：
   // const default = defaultTo("layout-error");
   // default(path(["meta", "layout"], store.state.route))
-  return currentLayout;
+  return useAwd && isMobile.value ? mobileLayout : currentLayout;
+  // defaulto的功用就是給預設值
+  // 這邊的用法是先設定defaultTo預設值，
+  // 緊接著馬上用設置好的預設值下去執行再return結果給變數
+  // 所以才會是兩個（）（）分別代表執行了兩次fn，設置及使用
+  // 分解大概長這樣：
+  // const default = defaultTo("layout-error");
+  // default(path(["meta", "layout"], store.state.route))
 });
 const checkDevice = () => {
   isMobile.value = window.innerWidth <= 768;
