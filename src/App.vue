@@ -42,8 +42,6 @@ const checkDevice = () => {
 };
 
 const getComponent = (vnode: VNode) => {
-  console.log("Original vnode:", vnode);
-
   if (vnode?.type && typeof vnode.type === "object") {
     const componentType = vnode.type as {
       desktop?: () => Promise<Component>;
